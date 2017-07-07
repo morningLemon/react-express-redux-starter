@@ -1,14 +1,18 @@
+// 'use strict';
+
+const webpack = require('webpack');
 const path = require('path');
  
 module.exports = {
-  context: path.join(__dirname, 'src'),
-  entry: [
-    './main.js',
-  ],
-  output: {
-    path: path.join(__dirname, 'www'),
-    filename: 'bundle.js',
+  // context: path.join(__dirname, './public'),
+  entry: {
+    public: [ 'babel-polyfill', './public/js/app.jsx' ]
   },
+
+  resolve: {
+    extensions: [ '.js', '.jsx' ]
+  },
+
   module: {
     rules: [
       {
@@ -20,9 +24,10 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    modules: [
-      path.join(__dirname, 'node_modules'),
-    ],
+
+  output: {
+    filename: 'bundle.js',
+    publicPath: '/',
+    path: path.resolve(__dirname, 'dist'),
   },
 };
